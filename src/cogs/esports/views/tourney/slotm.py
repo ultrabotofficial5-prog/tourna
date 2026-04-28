@@ -299,8 +299,8 @@ class TourneySlotManager(discord.ui.View):
         if not second_slot:
             return
 
-        await TMSlot.get(pk=first_slot.id).update(num=second_slot.num)
-        await TMSlot.get(pk=second_slot.id).update(num=first_slot.num)
+        await TMSlot.filter(pk=first_slot.id).update(num=second_slot.num)
+        await TMSlot.filter(pk=second_slot.id).update(num=first_slot.num)
 
         await inter.followup.send(
             f"{emote.check} | Groups were swapped. Press 'Refresh' button under grouplist.", ephemeral=True

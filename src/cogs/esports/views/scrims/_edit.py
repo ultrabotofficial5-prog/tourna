@@ -52,7 +52,7 @@ class ScrimsEditor(ScrimsView):
     async def initial_message(self):
         scrim = self.record
 
-        _e = discord.Embed(color=0x00FFB3, url=self.ctx.config.SERVER_LINK)
+        _e = discord.Embed(color=0xEE4B2B, url=self.ctx.config.SERVER_LINK)
         _e.title = "Scrims Editor - Edit Settings"
 
         fields = {

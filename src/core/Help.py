@@ -36,13 +36,13 @@ class HelpCommand(commands.HelpCommand):
 
         server = f"[Support Server]({config.SERVER_LINK})"
         invite = f"[Invite Me]({config.BOT_INVITE})"
-        dashboard = f"[Privacy Policy](https://github.com/quotientbot/Quotient-Bot/wiki/privacy-policy)"
+        dashboard = f"[Privacy Policy](https://github.com/ubosachin/TOURNEY-BY-UBO/wiki/privacy-policy)"
 
         embed.description = f"{server} **|** {invite} **|** {dashboard}\n\n"
 
         guild = await Guild.get_or_none(pk=ctx.guild.id)
         if guild and guild.is_premium:
-            embed.description += f"{emote.top_user} [__Server Premium ending:__]({config.SERVER_LINK}) *`forever (or until Cyclone dies)`*"
+            embed.description += f"{emote.top_user} [__Server Premium ending:__]({config.SERVER_LINK}) *`forever (or until TOURNEY - BY UBO dies)`*"
 
         for cog, cmds in mapping.items():
             user = await User.get(user_id=ctx.author.id)  # safe way to check isDev

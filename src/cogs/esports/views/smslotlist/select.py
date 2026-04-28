@@ -49,7 +49,7 @@ class BanOptions(discord.ui.View):
         self.value: str = None
 
     def initial_embed(self):
-        _e = discord.Embed(color=0x00FFB3, title="Ban karne ka style choose karo :)", url=config.SERVER_LINK)
+        _e = discord.Embed(color=0xEE4B2B, title="Ban karne ka style choose karo :)", url=config.SERVER_LINK)
         _e.description = (
             f"{kd(1)} - Ban Team leader from this scrim.\n\n"
             f"{kd(2)} - Ban whole team from this scrim.\n\n"

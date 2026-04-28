@@ -17,7 +17,7 @@ import discord
 from aiocache import cached
 from discord import AllowedMentions, Intents
 from discord.ext import commands
-from lru import LRU
+from cachetools import LRUCache
 import types
 import marshal
 from tortoise import Tortoise
@@ -74,7 +74,7 @@ class Quotient(commands.AutoShardedBot):
         self.lockdown_msg: Optional[str] = None
         self._BotBase__cogs = commands.core._CaseInsensitiveDict()
 
-        self.message_cache: Dict[int, Any] = LRU(1024)  # type: ignore
+        self.message_cache: LRUCache[int, Any] = LRUCache(maxsize=1024)
 
         activities = []
         for act in getattr(cfg, "ACTIVITIES", []):
@@ -97,7 +97,7 @@ class Quotient(commands.AutoShardedBot):
           uptime=self._get_uptime(),
           cmds=self.cmd_invokes,
           msgs=self.seen_messages,
-          ping=round(self.latency * 1000)
+          ping=round(self.latency * 1000) if self.latency != float('inf') and self.latency == self.latency else 0
         )
 
         await self.change_presence(activity=discord.Activity(type=activity.type, name=name))
@@ -168,16 +168,16 @@ class Quotient(commands.AutoShardedBot):
 
     @property
     def prime_link(self):
-        return "https://quotientbot.xyz/premium"
+        return "https://synaphack.in"
 
     @property
     def color(self):
         return self.config.COLOR
 
     def reboot(self):
-        return os.system("pm2 reload quotient")
+        return os.system("pm2 reload tourney")
 
-    async def init_quo(self):
+    async def init_tourney(self):
         """Instantiating aiohttps ClientSession and telling tortoise to create relations"""
         self.session = aiohttp.ClientSession(loop=self.loop)
         await Tortoise.init(cfg.TORTOISE)
@@ -191,7 +191,7 @@ class Quotient(commands.AutoShardedBot):
             model.bot = self
 
     async def setup_hook(self) -> None:
-      await self.init_quo()
+      await self.init_tourney()
 
       if self.activities:
         self.loop.create_task(self.rotate_activity())
@@ -264,7 +264,7 @@ class Quotient(commands.AutoShardedBot):
         )
 
     async def on_ready(self):
-        print(f"[Quotient] Logged in as {self.user.name}({self.user.id})")
+        print(f"[TOURNEY - BY UBO] Logged in as {self.user.name}({self.user.id})")
         
 
         await self.fix_sql
@@ -279,7 +279,7 @@ class Quotient(commands.AutoShardedBot):
         guild_ids = [guild.id for guild in self.guilds] 
 
         for guild_id in guild_ids:
-          await Guild.get(pk=guild_id).update(
+          await Guild.filter(pk=guild_id).update(
             is_premium=True,
             premium_end_time=end_time,
             made_premium_by=self.user.id

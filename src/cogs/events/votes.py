@@ -36,7 +36,7 @@ class VotesCog(Cog):
         user_id = timer.kwargs["user_id"]
         vote = await Votes.get(user_id=user_id)
 
-        await Votes.get(pk=user_id).update(is_voter=False, notified=False)
+        await Votes.filter(pk=user_id).update(is_voter=False, notified=False)
 
         member = self.bot.server.get_member(user_id)
         if member is not None:
@@ -50,7 +50,7 @@ class VotesCog(Cog):
                 color=self.bot.color,
                 description=f"{constants.random_greeting()}, You asked me to remind you to vote.",
                 title="Vote Expired!",
-                url="https://quotientbot.xyz/vote",
+                url="https://tourney-bot.xyz/vote",
             )
             try:
                 await member.send(embed=embed)

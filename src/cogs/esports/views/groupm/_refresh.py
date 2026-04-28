@@ -43,7 +43,7 @@ class GroupRefresh(discord.ui.View):
 
         await TGroupList.filter(pk=record.pk).update(refresh_at=record.bot.current_time)
 
-        _e = discord.Embed(color=0x00FFB3, title=f"{tourney.name} - Group {record.group_number}")
+        _e = discord.Embed(color=0xEE4B2B, title=f"{tourney.name} - Group {record.group_number}")
         # _e.set_thumbnail(url=getattr(tourney.guild.icon, "url", None))
 
         _e.description = (
@@ -82,7 +82,7 @@ class GroupRefresh(discord.ui.View):
                 _slot = await TMSlot.get(pk=slot_id)
 
                 member = await tourney.bot.get_or_fetch_member(tourney.guild, _slot.leader_id)
-                _e = discord.Embed(color=0x00FFB3, title=f"Slot {group.index(_slot)+1}, Group {record.group_number}")
+                _e = discord.Embed(color=0xEE4B2B, title=f"Slot {group.index(_slot)+1}, Group {record.group_number}")
                 _e.description = (
                     f"> Team Name: `{_slot.team_name}`\n"
                     f"> Team Leader: `{member}`\n"

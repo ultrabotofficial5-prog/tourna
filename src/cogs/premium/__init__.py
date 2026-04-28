@@ -32,7 +32,7 @@ class PremiumCog(Cog, name="Premium"):
     @commands.command()
     @commands.bot_has_permissions(embed_links=True)
     async def pstatus(self, ctx: Context):
-        """Get your Quotient Premium status and the current server's."""
+        """Get your TOURNEY - BY UBO Premium status and the current server's."""
         guild = await Guild.filter(guild_id=ctx.guild.id).first()
 
 
@@ -41,9 +41,9 @@ class PremiumCog(Cog, name="Premium"):
 
         else:
             booster = guild.booster or await self.bot.fetch_user(guild.made_premium_by)
-            btext = f"\n> Activated: Yes!\n> Ending: *`forever (or until Cyclone dies)`*"
+            btext = f"\n> Activated: Yes!\n> Ending: *`forever (or until TOURNEY - BY UBO dies)`*"
 
-        embed = self.bot.embed(ctx, title="Quotient Premium", url=f"{self.bot.config.WEBSITE}")
+        embed = self.bot.embed(ctx, title="TOURNEY - BY UBO Premium", url=f"{self.bot.config.WEBSITE}")
         embed.add_field(name="Server", value=btext, inline=False)
         embed.set_thumbnail(url=ctx.guild.me.display_avatar.url)
         return await ctx.send(embed=embed)
@@ -59,7 +59,7 @@ class PremiumCog(Cog, name="Premium"):
         guild_ids = [guild.id for guild in self.bot.guilds]
 
         for guild_id in guild_ids:
-            await Guild.get(pk=guild_id).update(
+            await Guild.filter(pk=guild_id).update(
                 is_premium=True,
                 premium_end_time=end_time,
                 made_premium_by=self.bot.user.id
@@ -73,10 +73,10 @@ class PremiumCog(Cog, name="Premium"):
             booster = guild.booster or await self.bot.fetch_user(guild.made_premium_by)
             btext = (
                 f"\n> Activated: Yes!"
-                f"\n> Ending: *`forever (or until Cyclone dies)`*"
+                f"\n> Ending: *`forever (or until TOURNEY - BY UBO dies)`*"
             )
 
-        embed = self.bot.embed(ctx, title="Quotient Legacy Premium Refreshed", url=f"{self.bot.config.WEBSITE}")
+        embed = self.bot.embed(ctx, title="TOURNEY - BY UBO Premium Refreshed", url=f"{self.bot.config.WEBSITE}")
         embed.add_field(name="Server", value=btext, inline=False)
         embed.set_thumbnail(url=ctx.guild.me.display_avatar.url)
 
@@ -85,22 +85,22 @@ class PremiumCog(Cog, name="Premium"):
 
     @commands.hybrid_command(aliases=("perks", "pro"))
     async def premium(self, ctx: Context):
-        """Checkout Quotient Premium Plans."""
-        _e = discord.Embed(color=0x00FFB3)
-        _e.title = "💎 Welcome to Quotient Legacy!"
+        """Checkout TOURNEY - BY UBO Premium Plans."""
+        _e = discord.Embed(color=0xEE4B2B)
+        _e.title = "💎 Welcome to TOURNEY - BY UBO!"
         _e.description = (
-            "__**Perks you get with Quotient Legacy (completely FREE!)**__\n\n"
-            f"{emote.white_arrow} Access to `Quotient Legacy` bot.\n"
+            "__**Perks you get with TOURNEY - BY UBO (completely FREE!)**__\n\n"
+            f"{emote.white_arrow} Access to `TOURNEY - BY UBO` bot.\n"
             f"{emote.white_arrow} Unlimited Scrims.\n"
             f"{emote.white_arrow} Unlimited Tournaments.\n"
             f"{emote.white_arrow} Custom Reactions for Regs.\n"
             f"{emote.white_arrow} Smart SSverification.\n"
             f"{emote.white_arrow} Cancel-Claim Panel.\n"
             f"{emote.white_arrow} Premium Role + more...\n\n"
-            "_We provide this for free to honor the memory of Rohit, the original creator of Quotient. "
+            "_We provide this for free to honor the memory of Rohit, the original creator of TOURNEY - BY UBO. "
             "If you love what we do and want to support us to keep this alive, you can donate using the button below._"
         )
-        _e.set_footer(text="Thank you for being part of the Quotient Legacy ❤️")
+        _e.set_footer(text="Thank you for being part of the TOURNEY - BY UBO ❤️")
 
         v = discord.ui.View(timeout=None)
         v.add_item(DonateBtn())
@@ -155,10 +155,10 @@ class PremiumCog(Cog, name="Premium"):
 
         if (_ch := _g.private_ch) and _ch.permissions_for(_ch.guild.me).embed_links:
             _e = discord.Embed(
-                color=discord.Color.red(), title="⚠️__**Quotient Legacy Subscription Ended**__⚠️", url=config.SERVER_LINK
+                color=discord.Color.red(), title="⚠️__**TOURNEY - BY UBO Subscription Ended**__⚠️", url=config.SERVER_LINK
             )
             _e.description = (
-                "This is to inform you that your subscription of Quotient Legacy has been ended.\n\n"
+                "This is to inform you that your subscription of TOURNEY - BY UBO has been ended.\n\n"
                 "*Following is a list of perks or data you lost:*"
             )
 
@@ -206,7 +206,7 @@ class PremiumCog(Cog, name="Premium"):
 
         with suppress(discord.HTTPException, AttributeError):
             _e = discord.Embed(
-                color=discord.Color.gold(), description=f"Thanks **{member}** for purchasing Quotient Premium."
+                color=discord.Color.gold(), description=f"Thanks **{member}** for purchasing TOURNEY - BY UBO Premium."
             )
             _e.set_image(url=random_thanks())
             await self.hook.send(embed=_e, username="premium-logs", avatar_url=self.bot.config.PREMIUM_AVATAR)
@@ -216,17 +216,17 @@ class PremiumCog(Cog, name="Premium"):
 
         _e = discord.Embed(
             color=self.bot.color,
-            title="Quotient Legacy Purchase Successful!",
+            title="TOURNEY - BY UBO Purchase Successful!",
             url=self.bot.config.SERVER_LINK,
             description=(
                 f"{random_greeting()} {member.mention},\n"
-                f"Thanks for purchasing Quotient Premium. Your server **{upgraded_guild}** has access to Quotient Legacy features until `{_guild.premium_end_time.strftime('%d-%b-%Y %I:%M %p')}`.\n\n"
-                "[Click me to Invite Quotient Legacy Bot to your server](https://discord.com/oauth2/authorize?client_id=902856923311919104&scope=applications.commands%20bot&permissions=21175985838)\n"
+                f"Thanks for purchasing TOURNEY - BY UBO Premium. Your server **{upgraded_guild}** has access to TOURNEY - BY UBO features until `{_guild.premium_end_time.strftime('%d-%b-%Y %I:%M %p')}`.\n\n"
+                "[Click me to Invite TOURNEY - BY UBO Bot to your server](https://discord.com/oauth2/authorize?client_id=902856923311919104&scope=applications.commands%20bot&permissions=21175985838)\n"
             ),
         )
 
         if member not in self.bot.server.members:
-            _e.description += f"\n\n[To claim your Premium Role, Join Quotient HQ]({self.bot.config.SERVER_LINK})."
+            _e.description += f"\n\n[To claim your Premium Role, Join TOURNEY - BY UBO HQ]({self.bot.config.SERVER_LINK})."
 
         _view = discord.ui.View(timeout=None)
 

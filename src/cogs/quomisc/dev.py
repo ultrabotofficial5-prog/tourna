@@ -219,7 +219,7 @@ class Dev(Cog):
         import os
         import subprocess
 
-        REPO_URL = "https://github.com/CycloneAddons/Quotient-Legacy"
+        REPO_URL = "https://github.com/ubosachin/TOURNEY-BY-UBO"
         BRANCH = "main"
 
         def run(cmd):
@@ -267,7 +267,7 @@ class Dev(Cog):
 
         else:
             return await ctx.error(
-                "❌ Invalid mode.\nUse: `qupdate`, `qupdate reset`, or `qupdate force`."
+                "❌ Invalid mode.\nUse: `update`, `update reset`, or `update force`."
             )
 
         log.append(result.stdout)

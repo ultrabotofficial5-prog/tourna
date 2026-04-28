@@ -44,7 +44,7 @@ class Utility(Cog, name="utility"):
         self.bot = bot
 
     @commands.group(aliases=("timer", "remind"), invoke_without_command=True)
-    async def reminder(self, ctx: Context, *, when: TimeText(commands.clean_content)):  # noqa: F722
+    async def reminder(self, ctx: Context, *, when: typing.Annotated[TimeText, TimeText(commands.clean_content)]):
         """Reminds you of something after a certain amount of time.
 
         The input can be any direct date (e.g. YYYY-MM-DD) or a human
@@ -100,7 +100,7 @@ class Utility(Cog, name="utility"):
     @checks.is_mod()
     async def autorole(self, ctx: Context, off: typing.Optional[str]):
         """
-        Manage Quotient's autoroles.
+        Manage TOURNEY - BY UBO's autoroles.
         """
         if not off or off.lower() != "off":
             return await ctx.send_help(ctx.command)
@@ -593,7 +593,7 @@ class Utility(Cog, name="utility"):
     @commands.group(invoke_without_command=True)
     async def autopurge(self, ctx: Context):
         """
-        Set Quotient to delete every new message in a channel after  a specific interval.
+        Set TOURNEY - BY UBO to delete every new message in a channel after  a specific interval.
         """
         await ctx.send_help(ctx.command)
 
@@ -615,7 +615,7 @@ class Utility(Cog, name="utility"):
         if (count := await AutoPurge.filter(guild_id=ctx.guild.id).count()) >= 1 and not await ctx.is_premium_guild():
             return await ctx.error(
                 "You cannot set autopurge in more than 1 channel in free tier."
-                f"\nHowever [Quotient Premium]({ctx.bot.prime_link}) allows you to set autopurge in unlimited channels."
+                f"\nHowever [TOURNEY - BY UBO Premium]({ctx.bot.prime_link}) allows you to set autopurge in unlimited channels."
             )
 
         if channel.id in self.bot.cache.autopurge_channels:

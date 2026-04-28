@@ -42,12 +42,12 @@ class TourneyManager(EsportsBaseView):
         ]
 
         _e = discord.Embed(
-            color=self.bot.color, title="Quotient Smart Tournament Manager", url=self.bot.config.SERVER_LINK
+            color=self.bot.color, title="TOURNEY - BY UBO Smart Tournament Manager", url=self.bot.config.SERVER_LINK
         )
         _e.description = "\n".join(to_show) if to_show else "```Click Create button for new tourney.```"
         _e.set_thumbnail(url=self.ctx.guild.me.display_avatar.url)
         _e.set_footer(
-            text="Quotient Legacy allows unlimited tournaments.",
+            text="TOURNEY - BY UBO allows unlimited tournaments.",
             icon_url=getattr(self.ctx.author.display_avatar, "url", None),
         )
 
@@ -63,8 +63,8 @@ class TourneyManager(EsportsBaseView):
         if not await self.ctx.is_premium_guild():
             if await Tourney.filter(guild_id=self.ctx.guild.id).count() >= 1:
                 return await self.ctx.error(
-                    f"You need [Quotient Premium](https://quotientbot.xyz/premium) to create more than one tournament.\n"
-                    "\nBuy Prime for just ₹29 here: https://quotientbot.xyz/premium",
+                    f"You need [TOURNEY - BY UBO Premium](https://tourneybot.xyz/premium) to create more than one tournament.\n"
+                    "\nJoin our support server for more info: {self.bot.config.SERVER_LINK}",
                     7,
                 )
 
@@ -228,7 +228,7 @@ class TourneyManager(EsportsBaseView):
             last_slot = await tourney.assigned_slots.order_by("-num").first()
             slot = TMSlot(leader_id=leader.id, team_name=team_name, num=last_slot.num + 1 if last_slot else 1)
 
-            _e = discord.Embed(color=0x00FFB3)
+            _e = discord.Embed(color=0xEE4B2B)
             _e.description = f"**{slot.num}) NAME: {slot.team_name.upper()}**\n"
 
             _e.set_footer(
@@ -275,7 +275,7 @@ class TourneyManager(EsportsBaseView):
         _e = TourneySlotManager.initial_embed(tourney)
         slotm_message = await slotm_channel.send(embed=_e, view=_view)
 
-        await Tourney.get(pk=tourney.id).update(slotm_channel_id=slotm_channel.id, slotm_message_id=slotm_message.id)
+        await Tourney.filter(pk=tourney.id).update(slotm_channel_id=slotm_channel.id, slotm_message_id=slotm_message.id)
         await self.ctx.success(f"Slotmanager channel for {tourney} created successfully. ({slotm_channel.mention})", 7)
 
     @discord.ui.button(style=discord.ButtonStyle.green, label="Media-Partner")
@@ -293,9 +293,9 @@ class TourneyManager(EsportsBaseView):
         await interaction.response.defer()
         # if not await self.ctx.is_premium_guild():
         #     return await self.ctx.error(
-        #         "You need Quotient Premium to download Ms Excel file containing all the "
+        #         "You need TOURNEY - BY UBO Premium to download Ms Excel file containing all the "
         #         f"registration data of your tourneys.\n\n"
-        #         "Buy Premium for just ₹29 here: https://quotientbot.xyz/premium",
+        #         "Join our support server for more info: {self.bot.config.SERVER_LINK}",
         #         6,
         #     )
 

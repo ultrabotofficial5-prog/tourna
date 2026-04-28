@@ -75,20 +75,20 @@ async def premium_success(request: Request, txnId: str):
     if record.completed_at:
         return {"error": "Transaction is already complete."}
 
-    await PremiumTxn.get(txnid=txnId).update(raw_data=dict(form), completed_at=datetime.now(constants.IST))
+    await PremiumTxn.filter(txnid=txnId).update(raw_data=dict(form), completed_at=datetime.now(constants.IST))
     u, b = await User.get_or_create(user_id=record.user_id)
     plan = await PremiumPlan.get(pk=record.plan_id)
 
     end_time = u.premium_expire_time + plan.duration if u.is_premium else datetime.now(constants.IST) + plan.duration
 
-    await User.get(pk=u.pk).update(is_premium=True, premium_expire_time=end_time)
-    await User.get(pk=u.user_id).update(made_premium=ArrayAppend("made_premium", u.user_id))
+    await User.filter(pk=u.pk).update(is_premium=True, premium_expire_time=end_time)
+    await User.filter(pk=u.user_id).update(made_premium=ArrayAppend("made_premium", u.user_id))
 
     bot.dispatch("premium_purchase", record.txnid)
 
     guild = await Guild.get(pk=record.guild_id)
     end_time = guild.premium_end_time + plan.duration if guild.is_premium else datetime.now(constants.IST) + plan.duration
-    await Guild.get(pk=guild.pk).update(is_premium=True, premium_end_time=end_time, made_premium_by=u.user_id)
+    await Guild.filter(pk=guild.pk).update(is_premium=True, premium_end_time=end_time, made_premium_by=u.user_id)
 
     return {"success": "Transaction was successful. Please return to discord App."}
 
@@ -103,6 +103,10 @@ async def premium_failed(request: Request, txnId: str):
     if not "payu" in request.headers.get("origin"):
         return {"error": "Invalid Request Origin."}
 
-    await PremiumTxn.get(txnid=txnId).update(completed_at=datetime.now(constants.IST), raw_data=dict(form))
+    await PremiumTxn.filter(txnid=txnId).update(
+        status="FAILED",
+        completed_at=datetime.now(constants.IST),
+        raw_data=dict(form)
+    )
 
     return {"error": "Transaction Cancelled."}

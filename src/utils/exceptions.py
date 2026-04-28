@@ -8,21 +8,21 @@ class QuotientError(commands.CheckFailure):
 class NotSetup(QuotientError):
     def __init__(self):
         super().__init__(
-            "This command requires you to have ULTRA's private channel.\nKindly run `{ctx.prefix}setup` and try again."
+            "This command requires you to have TOURNEY - BY UBO's private channel.\nKindly run `{ctx.prefix}setup` and try again."
         )
 
 
 class NotPremiumGuild(QuotientError):
     def __init__(self):
         super().__init__(
-            "This command requires this server to be premium.\n\nCheckout ULTRA Premium [here]({ctx.bot.prime_link})"
+            "This command requires this server to be premium.\n\nCheckout TOURNEY - BY UBO Premium [here]({ctx.bot.prime_link})"
         )
 
 
 class NotPremiumUser(QuotientError):
     def __init__(self):
         super().__init__(
-            "This command requires you to be a premium user.\nCheckout ULTRA Premium [here]({ctx.bot.prime_link})"
+            "This command requires you to be a premium user.\nCheckout TOURNEY - BY UBO Premium [here]({ctx.bot.prime_link})"
         )
 
 

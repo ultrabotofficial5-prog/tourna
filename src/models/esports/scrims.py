@@ -26,7 +26,7 @@ class Scrim(BaseDbModel):
 
     id = fields.BigIntField(pk=True, index=True)
     guild_id = fields.BigIntField()
-    name = fields.TextField(default="Quotient-Scrims")
+    name = fields.TextField(default="Tourney-Scrims")
     registration_channel_id = fields.BigIntField(index=True)
     slotlist_channel_id = fields.BigIntField()
     slotlist_message_id = fields.BigIntField(null=True)
@@ -98,7 +98,7 @@ class Scrim(BaseDbModel):
     @property
     def logschan(self):
         if self.guild is not None:
-            return discord.utils.get(self.guild.text_channels, name="quotient-scrims-logs")
+            return discord.utils.get(self.guild.text_channels, name="tourney-scrims-logs")
 
     @property
     def modrole(self):
@@ -196,7 +196,7 @@ class Scrim(BaseDbModel):
 
     @staticmethod
     def default_slotlist_format():
-        return discord.Embed(color=0x00FFB3, title=f"<<name>> Slotlist", description="```\n<<slots>>\n```").set_footer(
+        return discord.Embed(color=0xEE4B2B, title=f"<<name>> Slotlist", description="```\n<<slots>>\n```").set_footer(
             text=f"Registration took: <<time_taken>>"
         )
 
@@ -257,7 +257,7 @@ class Scrim(BaseDbModel):
         if not reminders:
             return
 
-        _e = discord.Embed(color=0x00FFB3, title=f"Slot Available to Claim - {channel.guild.name}", url=link)
+        _e = discord.Embed(color=0xEE4B2B, title=f"Slot Available to Claim - {channel.guild.name}", url=link)
         _e.description = f"A slot of {self} is available to claim in {channel.mention}!\nClaim it before anyone else do."
 
         async for user in self.bot.resolve_member_ids(self.guild, [i.user_id for i in reminders]):
@@ -453,7 +453,7 @@ class Scrim(BaseDbModel):
                 scrims_mod: discord.PermissionOverwrite(read_messages=True),
             }
             scrims_log_channel = await guild.create_text_channel(
-                name="quotient-scrims-logs",
+                name="tourney-scrims-logs",
                 overwrites=overwrites,
                 reason=_reason,
                 topic="**DO NOT RENAME THIS CHANNEL**",
@@ -467,7 +467,7 @@ class Scrim(BaseDbModel):
                     f"scrims-moderators. User with {scrims_mod.mention} can also send messages in "
                     f"registration channels and they won't be considered as scrims-registration.\n\n"
                     f"`Note`: **Do not rename this channel.**",
-                    color=0x00FFB3,
+                    color=0xEE4B2B,
                 )
             )
             await note.pin()

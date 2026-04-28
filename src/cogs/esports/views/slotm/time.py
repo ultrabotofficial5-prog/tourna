@@ -21,7 +21,7 @@ class MatchTimeEditor(discord.ui.Button):
     async def callback(self, interaction: discord.Interaction):
         await interaction.response.defer()
 
-        _e = discord.Embed(color=0x00FFB3)
+        _e = discord.Embed(color=0xEE4B2B)
         _e.description = (
             "Please enter the time of matches/scrims in the following format:\n"
             "`#registration_channel match_time`\n\n"

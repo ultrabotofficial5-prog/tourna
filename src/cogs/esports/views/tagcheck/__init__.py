@@ -24,7 +24,7 @@ class TagCheckView(EsportsBaseView):
         records = await TagCheck.filter(guild_id=self.ctx.guild.id)
         to_show = [f"`{idx}.` {_.__str__()}" for idx, _ in enumerate(records, start=1)]
         _m = "\n".join(to_show) if to_show else "```No TagCheck channels found.```"
-        _e = discord.Embed(color=0x00FFB3, title="TagCheck Editor")
+        _e = discord.Embed(color=0xEE4B2B, title="TagCheck Editor")
         _e.description = "**Current TagCheck channels:**\n" + _m
         _e.set_footer(text="Click Add Channel to set up a new TagCheck channel.")
         return _e

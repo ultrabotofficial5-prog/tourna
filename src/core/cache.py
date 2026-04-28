@@ -67,7 +67,7 @@ class CacheManager:
 
     async def update_guild_cache(self, guild_id: int, *, set_default=False) -> None:
         if set_default:
-            await Guild.get(pk=guild_id).update(
+            await Guild.filter(pk=guild_id).update(
                 prefix=config.PREFIX, embed_color=config.COLOR, embed_footer=config.FOOTER
             )
 

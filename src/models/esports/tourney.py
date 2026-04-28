@@ -25,7 +25,7 @@ class Tourney(BaseDbModel):
 
     id = fields.BigIntField(pk=True, index=True)
     guild_id = fields.BigIntField()
-    name = fields.CharField(max_length=30, default="Quotient-Tourney")
+    name = fields.CharField(max_length=30, default="Tourney-Event")
     registration_channel_id = fields.BigIntField(index=True)
     confirm_channel_id = fields.BigIntField()
     role_id = fields.BigIntField()
@@ -82,7 +82,7 @@ class Tourney(BaseDbModel):
     @property
     def logschan(self) -> Optional[discord.TextChannel]:
         if (g := self.guild) is not None:
-            return discord.utils.get(g.text_channels, name="quotient-tourney-logs")
+            return discord.utils.get(g.text_channels, name="tourney-event-logs")
 
     @property
     def registration_channel(self) -> Optional[discord.TextChannel]:
@@ -289,7 +289,7 @@ class Tourney(BaseDbModel):
                 tourney_mod: discord.PermissionOverwrite(read_messages=True),
             }
             tourney_log_channel = await _g.create_text_channel(
-                name="quotient-tourney-logs",
+                name="tourney-event-logs",
                 overwrites=overwrites,
                 reason=_reason,
                 topic="**DO NOT RENAME THIS CHANNEL**",
@@ -430,8 +430,7 @@ class Tourney(BaseDbModel):
             msg = await self.slotm_channel.send(embed=_e, view=_view)
             await self.make_changes(slotm_message_id=msg.id)
 
-        finally:
-            return True
+        return True
 
     async def check_fake_tags(self, message: discord.Message):
         query = """

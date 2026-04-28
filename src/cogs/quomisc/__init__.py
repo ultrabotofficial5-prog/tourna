@@ -36,16 +36,16 @@ class Quomisc(Cog, name="quomisc"):
     @commands.command(aliases=("src",))
     async def source(self, ctx: Context, *, search: typing.Optional[str]):
         """Refer to the source code of the bot commands."""
-        og_source_url = "https://github.com/quotientbot/Quotient-Bot"
-        legacy_url = "https://github.com/CycloneAddons/Quotient-Legacy"
+        og_source_url = "https://github.com/ubosachin"
+        legacy_url = "https://github.com/ubosachin"
 
         if search is None:
             e = Embed(
                 title="📦 Bot Source Code",
                 description=(
-                    f"**Original Quotient Source:** [Click Here]({og_source_url})\n"
-                    f"**Quotient Legacy:** [Private Repository]({legacy_url})\n\n"
-                    "_The Quotient Legacy repo is now open-source with video tutorial._ https://www.youtube.com/watch?v=7E2hB0sX0hg"
+                    f"**Original TOURNEY - BY UBO Source:** [Click Here]({og_source_url})\n"
+                    f"**TOURNEY - BY UBO:** [Private Repository]({legacy_url})\n\n"
+                    f"_The TOURNEY - BY UBO repo is now open-source with video tutorial._ https://www.youtube.com/watch?v=7E2hB0sX0hg"
                 ),
                 color=config.COLOR
             )
@@ -72,16 +72,16 @@ class Quomisc(Cog, name="quomisc"):
 
     @commands.command(aliases=("inv",))
     async def invite(self, ctx: Context):
-        """Quotient Invite Links."""
+        """TOURNEY - BY UBO Invite Links."""
         v = discord.ui.View(timeout=None)
         v.add_item(
             discord.ui.Button(
-                style=discord.ButtonStyle.link, label="Invite Quotient (Me)", url=self.bot.config.BOT_INVITE, row=1
+                style=discord.ButtonStyle.link, label="Invite TOURNEY - BY UBO (Me)", url=self.bot.config.BOT_INVITE, row=1
             )
         )
         v.add_item(
             discord.ui.Button(
-                style=discord.ButtonStyle.link, label="Invite Quotient Legacy", url=self.bot.config.PRO_LINK, row=2
+                style=discord.ButtonStyle.link, label="Invite TOURNEY - BY UBO Legacy", url=self.bot.config.PRO_LINK, row=2
             )
         )
         v.add_item(
@@ -112,7 +112,7 @@ class Quomisc(Cog, name="quomisc"):
             ctx.author: discord.PermissionOverwrite(read_messages=True, send_messages=True, read_message_history=True),
         }
         channel = await guild.create_text_channel(
-            "quotient-private", overwrites=overwrites, reason=f"Made by {str(ctx.author)}"
+            "tourney-private", overwrites=overwrites, reason=f"Made by {str(ctx.author)}"
         )
         await Guild.filter(guild_id=ctx.guild.id).update(private_channel=channel.id)
 
@@ -120,7 +120,7 @@ class Quomisc(Cog, name="quomisc"):
         e.add_field(
             name="**What is this channel for?**",
             inline=False,
-            value="This channel is made for Quotient to send important announcements and activities that need your attention. If anything goes wrong with any of my functionality I will notify you here. Important announcements from the developer will be sent directly here too.\n\nYou can test my commands in this channel if you like. Kindly don't delete it , some of my commands won't work without this channel.",
+            value="This channel is made for TOURNEY - BY UBO to send important announcements and activities that need your attention. If anything goes wrong with any of my functionality I will notify you here. Important announcements from the developer will be sent directly here too.\n\nYou can test my commands in this channel if you like. Kindly don't delete it , some of my commands won't work without this channel.",
         )
         e.add_field(
             name="**__Important Links__**", value=f"{support_link} | {invite_link} | {vote_link} | {source}", inline=False
@@ -138,9 +138,9 @@ class Quomisc(Cog, name="quomisc"):
     @commands.bot_has_guild_permissions(manage_channels=True, manage_webhooks=True)
     async def setup_cmd(self, ctx: Context):
         """
-        Setup Quotient in the current server.
+        Setup TOURNEY - BY UBO in the current server.
         This creates a private channel in the server. You can rename that if you like.
-        Quotient requires manage channels and manage wehooks permissions for this to work.
+        TOURNEY - BY UBO requires manage channels and manage wehooks permissions for this to work.
         You must have manage server permission.
         """
 
@@ -165,26 +165,23 @@ class Quomisc(Cog, name="quomisc"):
 
         # [`hash`](url) message (offset)
         offset = format_relative(commit_time.astimezone(timezone.utc))
-        return f"[`{short_sha2}`](https://github.com/CycloneAddons/Quotient-Legacy/commit/{commit.hex}) {truncate_string(short,40)} ({offset})"
+        return f"[`{short_sha2}`](https://github.com/ubosachin/TOURNEY-BY-UBO/commit/{commit.hex}) {truncate_string(short,40)} ({offset})"
 
     def get_last_commits(self, count=3):
-       if not os.path.exists(".git"):
-         return "⚠️ No .git directory found — not a git repository."
+        if not os.path.exists(".git"):
+            return "⚠️ No .git directory found — not a git repository."
 
-       try:
-        repo = pygit2.Repository(".git")
-        commits = list(itertools.islice(
-            repo.walk(repo.head.target, pygit2.GIT_SORT_TOPOLOGICAL),
-            count
-        ))
-        return "\n".join(self.format_commit(c) for c in commits) if commits else "ℹ️ No commits found."
-       except Exception as e:
-         return f"❌ Error reading git repository: {e}"
+        try:
+            repo = pygit2.Repository(".git")
+            commits = list(itertools.islice(repo.walk(repo.head.target, pygit2.GIT_SORT_TOPOLOGICAL), count))
+            return "\n".join(self.format_commit(c) for c in commits) if commits else "ℹ️ No commits found."
+        except Exception as e:
+            return f"❌ Error reading git repository: {e}"
 
     @commands.command(aliases=("stats",))
     @commands.cooldown(1, 10, commands.BucketType.guild)
     async def about(self, ctx: Context):
-        """Statistics of Quotient."""
+        """Statistics of TOURNEY - BY UBO."""
         db_latency = await self.bot.db_latency
 
         version = pkg_resources.get_distribution("discord.py").version
@@ -204,7 +201,7 @@ class Quomisc(Cog, name="quomisc"):
         chnl_count = Counter(map(lambda ch: ch.type, self.bot.get_all_channels()))
 
         owner = await self.bot.getch(self.bot.get_user, self.bot.fetch_user, ctx.config.OWNER_ID)
-        legacy_owner = await self.bot.getch(self.bot.get_user, self.bot.fetch_user, 548163406537162782)
+        legacy_owner = await self.bot.getch(self.bot.get_user, self.bot.fetch_user, 1193141979375210546)
 
         msges = self.bot.seen_messages
         guild_value = len(self.bot.guilds)
@@ -213,7 +210,7 @@ class Quomisc(Cog, name="quomisc"):
             description=f"{emote.diamond} **Latest Changes:**\n{revision}",
             color=self.bot.color
         )
-        embed.title = f"{emote.bot} Quotient - The Legacy Continues"
+        embed.title = f"{emote.bot} TOURNEY - BY UBO - The Legacy Continues"
         embed.url = ctx.config.SERVER_LINK
         embed.set_author(name=str(owner), icon_url=owner.display_avatar.url)
 
@@ -241,7 +238,7 @@ class Quomisc(Cog, name="quomisc"):
         )
         embed.add_field(
             name=f"{emote.settings_yes} System Stats",
-            value=f"**Ping:** {round(self.bot.latency * 1000, 2)}ms\n"
+            value=f"**Ping:** {round(self.bot.latency * 1000, 2) if self.bot.latency != float('inf') and self.bot.latency == self.bot.latency else 0}ms\n"
                   f"**Database:** {db_latency}\n"
                   f"**IPM:** {round(get_ipm(ctx.bot), 2)}\n"
                   f"**RAM:** {used_memory}/{total_memory} MB\n"
@@ -249,15 +246,15 @@ class Quomisc(Cog, name="quomisc"):
         )
 
         embed.add_field(
-             name=f"{emote.diamond} Legacy & Tribute",
-             value=f"Originally created by [**{str(legacy_owner)}**](https://github.com/deadaf), whose vision built the foundation of Quotient.",
+             name=f"{emote.diamond} Developed By",
+             value=f"[**UBO TEAM**](https://tourneybot.xyz), bringing you the best esports experience.",
              inline=False,
           )
 
 
         embed.set_footer(
-            text=f"Made with discord.py v{version} | Powered by Devspire",
-            icon_url="http://i.imgur.com/5BFecvA.png",
+            text=f"Made with discord.py v{version} | Powered by TOURNEY - BY UBO",
+            icon_url=self.bot.user.display_avatar.url,
         )
 
         links = [
@@ -269,7 +266,7 @@ class Quomisc(Cog, name="quomisc"):
     @commands.command()
     async def ping(self, ctx: Context):
         """Check how the bot is doing"""
-        await ctx.send(f"Bot: `{round(self.bot.latency*1000, 2)} ms`, Database: `{await self.bot.db_latency}`")
+        await ctx.send(f"Bot: `{round(self.bot.latency*1000, 2) if self.bot.latency != float('inf') and self.bot.latency == self.bot.latency else 0} ms`, Database: `{await self.bot.db_latency}`")
 
     @commands.command()
     async def voteremind(self, ctx: Context):
@@ -302,7 +299,7 @@ class Quomisc(Cog, name="quomisc"):
     @commands.has_permissions(manage_guild=True)
     @checks.is_premium_guild()
     async def color(self, ctx: Context, *, new_color: QuoColor):
-        """Change color of Quotient's embeds"""
+        """Change color of TOURNEY - BY UBO's embeds"""
         color = int(str(new_color).replace("#", ""), 16)  # The hex value of a color.
 
         self.bot.cache.guild_data[ctx.guild.id]["color"] = color
@@ -313,7 +310,7 @@ class Quomisc(Cog, name="quomisc"):
     @checks.is_premium_guild()
     @commands.has_permissions(manage_guild=True)
     async def footer(self, ctx: Context, *, new_footer: str):
-        """Change footer of embeds sent by Quotient"""
+        """Change footer of embeds sent by TOURNEY - BY UBO"""
         if len(new_footer) > 50:
             return await ctx.success(f"Footer cannot contain more than 50 characters.")
 
@@ -325,29 +322,29 @@ class Quomisc(Cog, name="quomisc"):
     async def money(self, ctx: Context):
         user = await User.get(user_id=ctx.author.id)
 
-        e = self.bot.embed(ctx, title="Your Quo Coins")
+        e = self.bot.embed(ctx, title="Your Tourney Coins")
         e.set_thumbnail(url=self.bot.user.display_avatar.url)
 
         e.description = (
-            f"💰 | You have a total of `{user.money} Quo Coins`.\n"
-            f"*Quo Coins can be earned by voting [here]({ctx.config.WEBSITE}/vote)*"
+            f"💰 | You have a total of `{user.money} Tourney Coins`.\n"
+            f"*Tourney Coins can be earned by voting [here]({ctx.config.WEBSITE}/vote)*"
         )
 
         _view = MoneyButton(ctx)
         if not user.money >= 120:
             _view.children[0] = discord.ui.Button(
-                label=f"Claim Prime (120 coins)", custom_id="claim_prime", style=discord.ButtonStyle.grey, disabled=True
+                label=f"Claim Premium (120 Tourney coins)", custom_id="claim_premium", style=discord.ButtonStyle.grey, disabled=True
             )
 
         _view.message = await ctx.send(embed=e, embed_perms=True, view=_view)
 
     @commands.command()
     async def vote(self, ctx: Context):
-        e = self.bot.embed(ctx, title="Vote for Quotient")
+        e = self.bot.embed(ctx, title="Vote for TOURNEY - BY UBO")
         e.description = (
             "**Rewards**\n"
             f"{emote.roocool} Voter Role `12 hrs`\n"
-            f"{self.bot.config.PRIME_EMOJI} Quo Coin `x1`"
+            f"{self.bot.config.PRIME_EMOJI} Tourney Coin `x1`"
         )
         e.set_thumbnail(url=self.bot.user.display_avatar.url)
 
@@ -372,13 +369,13 @@ class Quomisc(Cog, name="quomisc"):
     @commands.command()
     async def dashboard(self, ctx: Context):
         await ctx.send(
-            f"Here is the direct link to this server's dashboard:\n<https://quotientbot.xyz/dashboard/{ctx.guild.id}>"
+            f"Here is the direct link to this server's dashboard:\n<https://tourneybot.xyz/dashboard/{ctx.guild.id}>"
         )
 
     @commands.hybrid_command()
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def contributors(self, ctx):
-        """People who made Quotient Possible."""
+        """People who made TOURNEY - BY UBO Possible."""
         url = f"https://api.github.com/repos/quotientbot/Quotient-Bot/contributors"
 
         e = discord.Embed(title=f"Project Contributors", color=self.bot.color, timestamp=self.bot.current_time)
@@ -393,7 +390,7 @@ class Quomisc(Cog, name="quomisc"):
                     f"`{idx:02}.` [{contributor['login']} ({contributor['contributions']})]({contributor['html_url']})\n"
                 )
 
-        e.description += "\n`–` Revived and maintained by [Cyclone Addons](https://github.com/CycloneAddons)"
+        e.description += "\n`–` Revived and maintained by [Cyclone Addons](https://github.com/ubosachin)"
         await ctx.send(embed=e)
 
 

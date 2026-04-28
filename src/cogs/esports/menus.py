@@ -11,6 +11,7 @@ import constants
 from models import Scrim
 from models.helpers import *  # noqa: F401, F403
 from utils import *  # noqa: F401, F403
+from utils import inputs
 
 from .errors import ScrimError
 from .helpers import delete_denied_message, scrim_work_role
@@ -92,7 +93,7 @@ from .helpers import delete_denied_message, scrim_work_role
 #     async def on_c(self, payload):
 #         if not await self.ctx.is_premium_guild():
 #             return await self.ctx.error(
-#                 "This feature is available to premium servers only.\n\nYou can upgrade your server with Quotient Premium to use this.\n\n`Kindly use qperks cmd to know more.`",
+#                 "This feature is available to premium servers only.\n\nYou can upgrade your server with TOURNEY - BY UBO Premium to use this.\n\n`Kindly use qperks cmd to know more.`",
 #                 delete_after=4,
 #             )
 
@@ -504,7 +505,7 @@ class AutocleanMenu(menus.Menu):
         msg = await self.ctx.send(
             "**At what time should I run cleaner?**"
             "**Example: 14:00** - Registration will open at 2PM.\n\n"
-            "**Currently ULTRA BOT OFFICIAL works according to Indian Standard Time (UTC+05:30)**"
+            "**Currently TOURNEY - BY UBO works according to Indian Standard Time (UTC+05:30)**"
         )
 
         clean_time = await inputs.time_input(self.ctx, self.check, delete_after=True)
@@ -722,7 +723,7 @@ class ConfigEditMenu(menus.Menu):
         msg = await self.cembed(
             "**At what time should I open registrations?**"
             "**Example: 14:00** - Registration will open at 2PM.\n\n"
-            "**Currently ULTRA BOT OFFICIAL works according to Indian Standard Time (UTC+05:30)**"
+            "**Currently TOURNEY - BY UBO works according to Indian Standard Time (UTC+05:30)**"
         )
 
         open_time = await inputs.time_input(self.ctx, self.check, delete_after=True)

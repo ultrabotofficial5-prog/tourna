@@ -31,7 +31,7 @@ class ScrimsSlotmEditor(EsportsBaseView):
         self.record = record
 
     def initial_embed(self):
-        _e = discord.Embed(color=0x00FFB3, title="Slot-M Editor")
+        _e = discord.Embed(color=0xEE4B2B, title="Slot-M Editor")
 
         fields = {
             "Main Channel": getattr(self.record.main_channel, "mention", "Not-Found"),

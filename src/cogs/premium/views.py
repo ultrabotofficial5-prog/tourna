@@ -13,7 +13,7 @@ class DonateBtn(discord.ui.Button):
 
 
 class LegacyView(discord.ui.View):
-    def __init__(self, text="This feature is available in Quotient Legacy for free!"):
+    def __init__(self, text="This feature is available in TOURNEY - BY UBO for free!"):
         super().__init__(timeout=None)
         self.text = text
         # Add the donate button
@@ -21,11 +21,11 @@ class LegacyView(discord.ui.View):
 
     @property
     def legacy_embed(self) -> discord.Embed:
-        _e = discord.Embed(color=0x00FFB3)
-        _e.title = "💎 Welcome to Quotient Legacy!"
+        _e = discord.Embed(color=0xEE4B2B)
+        _e.title = "💎 Welcome to TOURNEY - BY UBO!"
         _e.description = (
-            "__**Perks you get with Quotient Legacy (completely FREE!)**__\n\n"
-            f"{emote.white_arrow} Access to `Quotient Legacy` bot.\n"
+            "__**Perks you get with TOURNEY - BY UBO (completely FREE!)**__\n\n"
+            f"{emote.white_arrow} Access to `TOURNEY - BY UBO` bot.\n"
             f"{emote.white_arrow} Unlimited Scrims.\n"
             f"{emote.white_arrow} Unlimited Tournaments.\n"
             f"{emote.white_arrow} Custom Reactions for Regs.\n"
@@ -35,5 +35,5 @@ class LegacyView(discord.ui.View):
             "_We provide this for free to honor the memory of Rohit, the original creator of Quotient. "
             "If you love what we do and want to support us to keep this alive, you can donate using the button below._"
         )
-        _e.set_footer(text="Thank you for being part of the Quotient Legacy community ❤️")
+        _e.set_footer(text="Thank you for being part of the TOURNEY - BY UBO community ❤️")
         return _e

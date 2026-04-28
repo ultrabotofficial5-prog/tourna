@@ -29,7 +29,7 @@ class Mod(Cog):
     @commands.cooldown(5, 1, type=commands.BucketType.user)
     async def selfclean(self, ctx: Context, search=100):
         """
-        Clean Quotient's messages,
+        Clean TOURNEY - BY UBO's messages,
         Note: If bot has `manage_messages` permissions then it will delete the command messages too.
         """
         strategy = _self_clean_system

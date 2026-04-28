@@ -101,7 +101,7 @@ class ScrimBanType(Enum):
 
 
 bot_colors = {
-    746348747918934096: 0x00FFB3,
+    746348747918934096: 0xEE4B2B,
     744990850064580660: 0xF3B82B,
     846339012607082506: 0x87EA5C,
     902856923311919104: 0xFF4E4A,
@@ -163,16 +163,16 @@ def random_thanks():
 
 tips = (
     "We have an awesome support server:\ndiscord.gg/zXw3BuwtRe",
-    "You can set custom reactions for tourneys & scrims with ULTRA BOT OFFICIAL Legacy.",
+    "You can set custom reactions for tourneys & scrims with TOURNEY - BY UBO.",
     "I like your face : )",  # I really do
     "You can add a role to multiple users with `role @role @user @user2...` command.",
-    "ULTRA BOT OFFICIAL Legacy can detect and verify youtube/insta/loco,etc. screenshots (`ssverify` cmd).",
-    "ULTRA BOT OFFICIAL Legacy is free forever — if you love what we do, you can donate at <https://cycloneaddons.is-a.dev/donate>",
+    "TOURNEY - BY UBO can detect and verify youtube/insta/loco,etc. screenshots (`ssverify` cmd).",
+    "TOURNEY - BY UBO is free forever — if you love what we do, you can donate at <https://cycloneaddons.is-a.dev/donate>",
     "You can send customized embeds with `/embed` command.",
     "Scrims Slot Cancel-Claim is available for free with `slotm` command.",
     "You can create tourney groups with `tourney` command.",
     "Scrims Open & Close messages can be designed with `sm` command.",
-    "With ULTRA BOT OFFICIAL Legacy you can set custom DM message.",
+    "With TOURNEY - BY UBO you can set custom DM message.",
     # "We also make custom bots, checkout: https://discord.gg/7bKA8kZd44 ",
 )
 

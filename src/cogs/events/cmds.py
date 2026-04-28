@@ -33,7 +33,7 @@ class CmdEvents(Cog):
         author = ctx.author
         message = ctx.message
 
-        user = await User.get(user_id=author.id)  # safe way to check isDev
+        user = await User.get_or_none(user_id=author.id)  # safe way to check isDev
         is_dev = user.is_dev if user else False
 
         if is_dev:
@@ -59,8 +59,8 @@ class CmdEvents(Cog):
 
         if self.bot.lockdown is True:
             t = (
-                "**Quotient is getting new features** 🥳\n"
-                "Dear user, Quotient is updating and is not accepting any commands.\n"
+                "**TOURNEY - BY UBO is getting new features** 🥳\n"
+                "Dear user, TOURNEY - BY UBO is updating and is not accepting any commands.\n"
                 "It will back within **2 minutes**.\n"
             )
 
@@ -104,7 +104,7 @@ class CmdEvents(Cog):
             if not member.bot and record.humans:
                 for role in record.humans:
                     try:
-                        await member.add_roles(discord.Object(id=role), reason="Quotient's autorole")
+                        await member.add_roles(discord.Object(id=role), reason="TOURNEY - BY UBO's autorole")
                     except (discord.NotFound, discord.Forbidden):
                         await Autorole.filter(guild_id=guild.id).update(humans=ArrayRemove("humans", role))
                         continue
@@ -112,7 +112,7 @@ class CmdEvents(Cog):
             elif member.bot and record.bots:
                 for role in record.bots:
                     try:
-                        await member.add_roles(discord.Object(id=role), reason="Quotient's autorole")
+                        await member.add_roles(discord.Object(id=role), reason="TOURNEY - BY UBO's autorole")
                     except (discord.Forbidden, discord.NotFound):
                         await Autorole.filter(guild_id=guild.id).update(bots=ArrayRemove("bots", role))
                         continue

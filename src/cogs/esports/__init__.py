@@ -60,7 +60,7 @@ class ScrimManager(Cog, name="Esports"):
     @commands.cooldown(1, 15, type=commands.BucketType.guild)
     async def smanager(self, ctx: Context):
         """
-        Contains commands related to ULTRA BOT OFFICIAL's powerful scrims manager.
+        Contains commands related to TOURNEY - BY UBO's powerful scrims manager.
         """
         if not any((ctx.author.guild_permissions.manage_guild, Scrim.is_ignorable(ctx.author))):
             return await ctx.error(f"You need `scrims-mod` role or `Manage-Server` permissions to use this command.")
@@ -78,7 +78,7 @@ class ScrimManager(Cog, name="Esports"):
     )
     @commands.cooldown(1, 15, type=commands.BucketType.guild)
     async def tourney(self, ctx: Context):
-        """Create & Manage tournaments with ULTRA BOT OFFICIAL's Tourney Manager."""
+        """Create & Manage tournaments with TOURNEY - BY UBO's Tourney Manager."""
         if not Tourney.is_ignorable(ctx.author) and not ctx.author.guild_permissions.manage_guild:
             return await ctx.error(
                 "You need either `Manage Server` permissions or `@tourney-mod` role to manage tournaments."
@@ -123,7 +123,7 @@ class ScrimManager(Cog, name="Esports"):
 
     @commands.group(aliases=("eztag",), invoke_without_command=True)
     async def easytag(self, ctx: Context):
-        """Commands related to ULTRA BOT OFFICIAL's eztag"""
+        """Commands related to TOURNEY - BY UBO's eztag"""
         await ctx.send_help(ctx.command)
 
     @easytag.command(name="set", extras={"examples": ["eztag set #channel"]})
@@ -138,7 +138,7 @@ class ScrimManager(Cog, name="Esports"):
 
         if count == 1 and not guild.is_premium:
             return await ctx.error(
-                f"Upgrade your server to ULTRA BOT OFFICIAL Premium to setup more than 1 EasyTag channel.\n[Click Me to Purchase]({self.bot.prime_link})"
+                f"Upgrade your server to TOURNEY - BY UBO Premium to setup more than 1 EasyTag channel.\n[Click Me to Purchase]({self.bot.prime_link})"
             )
 
         if channel.id in self.bot.cache.eztagchannels:
@@ -153,10 +153,10 @@ class ScrimManager(Cog, name="Esports"):
                 f"I need `send messages`, `embed links` and `manage messages` permission in {channel.mention}"
             )
 
-        role = discord.utils.get(ctx.guild.roles, name="ULTRA-tag-ignore")
+        role = discord.utils.get(ctx.guild.roles, name="TOURNEY-tag-ignore")
         if not role:
             role = await ctx.guild.create_role(
-                name="ULTRA-tag-ignore", color=self.bot.color, reason=f"Created by {ctx.author}"
+                name="TOURNEY-tag-ignore", color=self.bot.color, reason=f"Created by {ctx.author}"
             )
 
         await EasyTag.create(guild_id=ctx.guild.id, channel_id=channel.id)
@@ -164,9 +164,9 @@ class ScrimManager(Cog, name="Esports"):
 
         embed = self.bot.embed(ctx, title="Easy Tagging")
         embed.description = """
-        Unable to mention teammates while registering for scrims or tournaments? ULTRA BOT OFFICIAL is here for the rescue.
+        Unable to mention teammates while registering for scrims or tournaments? TOURNEY - BY UBO is here for the rescue.
 
-        Use `teammate's ID`, `@teammate_name` or `@teammate's_discord_tag` in your registration format. ULTRA BOT OFFICIAL will convert that into an actual discord tag.        
+        Use `teammate's ID`, `@teammate_name` or `@teammate's_discord_tag` in your registration format. TOURNEY - BY UBO will convert that into an actual discord tag.        
         """
         embed.set_image(url="https://media.discordapp.net/attachments/775707108192157706/850788091236450344/eztags.gif")
         msg = await channel.send(embed=embed)
@@ -255,7 +255,7 @@ class ScrimManager(Cog, name="Esports"):
 
         if count == 1 and not guild.is_premium:
             return await ctx.error(
-                f"Upgrade your server to ULTRA BOT OFFICIAL Premium to setup more than 1 Tagcheck channel.\n[Click Me to Purchase]({self.bot.prime_link})"
+                f"Upgrade your server to TOURNEY - BY UBO Premium to setup more than 1 Tagcheck channel.\n[Click Me to Purchase]({self.bot.prime_link})"
             )
 
         if channel.id in self.bot.cache.tagcheck:
@@ -270,10 +270,10 @@ class ScrimManager(Cog, name="Esports"):
                 f"I need `send_messages`, `embed_links` and `manage_messages` permission in {channel.mention}"
             )
 
-        role = discord.utils.get(ctx.guild.roles, name="ULTRA-tag-ignore")
+        role = discord.utils.get(ctx.guild.roles, name="TOURNEY-tag-ignore")
         if not role:
             role = await ctx.guild.create_role(
-                name="ULTRA-tag-ignore", color=self.bot.color, reason=f"Created by {ctx.author}"
+                name="TOURNEY-tag-ignore", color=self.bot.color, reason=f"Created by {ctx.author}"
             )
 
         await TagCheck.create(guild_id=ctx.guild.id, channel_id=channel.id, required_mentions=mentions)

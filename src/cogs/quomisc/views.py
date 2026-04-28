@@ -51,7 +51,7 @@ class VoteButton(BaseView):
         self.add_item(
             discord.ui.Button(
                 style=discord.ButtonStyle.link,
-                url="https://quotientbot.xyz/vote",
+                url="https://tourneybot.xyz/vote",
                 label="Click Here",
             )
         )
@@ -64,7 +64,7 @@ class MoneyButton(BaseView):
         self.ctx = ctx
         self.bot: Quotient = ctx.bot
 
-    @discord.ui.button(style=discord.ButtonStyle.green, custom_id="claim_prime", label="Claim Prime (120 coins)")
+    @discord.ui.button(style=discord.ButtonStyle.green, custom_id="claim_premium", label="Claim Premium (120 Tourney coins)")
     async def claim_premium(self, interaction: discord.Interaction, button: discord.Button):
         await interaction.response.defer(ephemeral=True)
 
@@ -74,14 +74,14 @@ class MoneyButton(BaseView):
         _u = await User.get(pk=self.ctx.author.id)
         if not _u.money >= 120:
             return await interaction.followup.send(
-                f"{emote.error} Insufficient Quo Coins in your account.", ephemeral=True
+                f"{emote.error} Insufficient Tourney Coins in your account.", ephemeral=True
             )
 
         end_time = (
             _u.premium_expire_time + timedelta(days=30) if _u.is_premium else datetime.now(tz=IST) + timedelta(days=30)
         )
 
-        await User.get(pk=self.ctx.author.id).update(
+        await User.filter(pk=self.ctx.author.id).update(
             is_premium=True,
             premium_expire_time=end_time,
             money=_u.money - 120,
@@ -93,8 +93,8 @@ class MoneyButton(BaseView):
             await member.add_roles(discord.Object(id=self.bot.config.PREMIUM_ROLE), reason="They purchased premium.")
 
         await self.ctx.success(
-            "Credited Quotient Legacy for 1 Month to your account,\n\n"
-            "Use `qboost` in any server to upgrade it with Prime."
+            "Credited TOURNEY - BY UBO for 1 Month to your account,\n\n"
+            "Use `boost` in any server to upgrade it with Premium."
         )
 
 
@@ -110,4 +110,5 @@ class SetupButtonView(QuotientView):
 
     @discord.ui.button(label="setup tourney", custom_id="setup_tourney_button")
     async def setup_tourney_button(self, interaction: discord.Interaction, button: discord.Button):
+        await interaction.response.defer()
         return await self.ctx.simple(f"Kindly use `{self.ctx.prefix}t setup` to setup a tournament.")

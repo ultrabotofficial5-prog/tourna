@@ -71,11 +71,11 @@ class Context(commands.Context["commands.Bot"], Generic[BotT]):
         msg: Optional[discord.Message] = await self.send(embed=embed, view=view)
         await view.wait()
 
-        try:
-            if delete_after and msg is not None:
+        if delete_after and msg is not None:
+            with suppress(discord.HTTPException):
                 await msg.delete(delay=0)
-        finally:
-            return view.value
+
+        return view.value
 
     async def error(self, message: str, delete_after: bool = None, **kwargs: Any) -> Optional[discord.Message]:
         with suppress(discord.HTTPException):
@@ -90,9 +90,10 @@ class Context(commands.Context["commands.Bot"], Generic[BotT]):
                 pass
             else:
                 if msg is not None:
-                    await msg.delete(delay=0)
-            finally:
-                return msg
+                    with suppress(discord.HTTPException):
+                        await msg.delete(delay=0)
+
+            return msg
 
         return None
 
@@ -205,7 +206,7 @@ class Context(commands.Context["commands.Bot"], Generic[BotT]):
         with suppress(discord.HTTPException):
             await channel.purge(limit=limit, check=check)
 
-    async def premium_mango(self, msg: str = "This feature requires Quotient Premium.") -> Optional[discord.Message]:
+    async def premium_mango(self, msg: str = "This feature requires TOURNEY - BY UBO Premium.") -> Optional[discord.Message]:
         from cogs.premium.views import LegacyView
 
         _view = LegacyView(msg)
