@@ -33,6 +33,7 @@ cachetools = "^7.0.6"
 jinja2 = "^3.1.2"
 prettytable = "^3.8.0"
 discord-ext-menus = {git = "https://github.com/Rapptz/discord-ext-menus.git"}
+python-dotenv = "^1.0.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
