@@ -23,8 +23,6 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 COPY src src
 
-# Copy .git directory
-COPY .git .git
 
 
 ENTRYPOINT ["python","src/bot.py"]
