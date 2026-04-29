@@ -4,10 +4,14 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+# PostgreSQL connection URL: postgres://username@localhost:5432/database_name
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:BLeDCzaLYJuUpVqvYhrfZRyPolmndCnx@postgres.railway.internal:5432/railway")
+if DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgres://", 1)
+
 TORTOISE = {
     "connections": {
-         # PostgreSQL connection URL: postgres://username@localhost:5432/database_name
-         "default": os.getenv("DATABASE_URL", "postgres://sachin@localhost:5432/quotient_db"),
+         "default": DATABASE_URL,
     },
     "apps": {
         "models": {
