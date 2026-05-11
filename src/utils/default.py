@@ -63,12 +63,19 @@ def regional_indicator(c: str) -> str:
 
 def keycap_digit(c: Union[int, str]) -> str:
     """Returns a keycap digit emoji given a character."""
-    c = int(c)
-    if 0 < c < 10:
-        return str(c) + "\U0000FE0F\U000020E3"
-    if c == 10:
-        return "10\U0000FE0F\U000020E3"
-    raise ValueError("Invalid keycap digit")
+    mapping = {
+        1: "1️⃣",
+        2: "2️⃣",
+        3: "3️⃣",
+        4: "4️⃣",
+        5: "5️⃣",
+        6: "6️⃣",
+        7: "7️⃣",
+        8: "8️⃣",
+        9: "9️⃣",
+        10: "🔟",
+    }
+    return mapping.get(int(c), "❓")
 
 
 async def aenumerate(asequence, start=0):
