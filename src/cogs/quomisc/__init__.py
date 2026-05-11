@@ -13,7 +13,7 @@ from collections import Counter
 from datetime import datetime, timedelta, timezone
 
 import discord
-import pkg_resources
+import importlib.metadata
 import psutil
 import pygit2
 from discord.ext import commands
@@ -184,7 +184,7 @@ class Quomisc(Cog, name="quomisc"):
         """Statistics of TOURNEY - BY UBO."""
         db_latency = await self.bot.db_latency
 
-        version = pkg_resources.get_distribution("discord.py").version
+        version = importlib.metadata.version("discord.py")
         revision = self.get_last_commits()
 
         total_memory = psutil.virtual_memory().total >> 20
