@@ -43,7 +43,9 @@ os.environ["OMP_THREAD_LIMIT"] = "1"
 __all__ = ("Quotient", "bot")
 
 
-on_startup: List[Callable[["Quotient"], Coroutine]] = []
+def on_startup_task(func: Callable[["Quotient"], Coroutine]) -> Callable[["Quotient"], Coroutine]:
+    on_startup.append(func)
+    return func
 
 
 class Quotient(commands.AutoShardedBot):
@@ -110,13 +112,13 @@ class Quotient(commands.AutoShardedBot):
       minutes = (seconds % 3600) // 60
       return f"{days}d {hours}h {minutes}m"
 
-    @on_startup.append
+    @on_startup_task
     async def __load_extensions(self):
         for ext in self.config.EXTENSIONS:
             await self.load_extension(ext)
             print(f"Loaded extension: {ext}")
 
-    @on_startup.append
+    @on_startup_task
     async def __load_presistent_views(self):
         from cogs.esports.views import GroupRefresh, ScrimsSlotmPublicView, SlotlistEditButton, TourneySlotManager
         from models import Scrim, ScrimsSlotManager, TGroupList, Tourney
