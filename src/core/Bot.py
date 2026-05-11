@@ -43,6 +43,9 @@ os.environ["OMP_THREAD_LIMIT"] = "1"
 __all__ = ("Quotient", "bot")
 
 
+on_startup: List[Callable[["Quotient"], Coroutine]] = []
+
+
 def on_startup_task(func: Callable[["Quotient"], Coroutine]) -> Callable[["Quotient"], Coroutine]:
     on_startup.append(func)
     return func
